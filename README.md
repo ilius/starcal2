@@ -48,7 +48,7 @@ Or:
 
 
 ## Home Pages:
-    http://ilius.github.io/starcal
+    http://ilius.github.io/starcal2
 
 ## Follow Us:
 To get notified on new releases, subscribe to [releases atom feed](https://github.com/ilius/starcal2/releases.atom)
