@@ -1,5 +1,7 @@
 StarCalendar (Desktop)
 =============
+**This is an old and discontinued branch. For latest version, visit https://github.com/ilius/starcal**
+
 *A full-featured international calendar written in Python* 
 
 ##Download latest codes via git:
