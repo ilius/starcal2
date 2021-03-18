@@ -7,15 +7,22 @@ function getDirTotalSize(){
 }
 
 function installPackage(){
-	pkgFile="$1"
+	# must run `set +e` before running this function
+	pkgPath="$1"
 	if [ -f /usr/bin/apt ] ; then
-		if /usr/bin/apt reinstall "./$pkgFile" 2>/tmp/starcal-apt-error ; then
+		/usr/bin/apt reinstall "$pkgPath" 2>/tmp/starcal-apt-error
+		aptExitCode="$?"
+		if [[ $aptExitCode == "0" ]] ; then
 			return 0
 		fi
 		cat /tmp/starcal-apt-error
 		rm /tmp/starcal-apt-error
+		if [[ $aptExitCode == "1" ]] ; then
+			# user answered No, abort installation
+			return $aptExitCode
+		fi
 	fi
-	dpkg -i "$pkgFile" || apt-get -f install
+	dpkg -i "$pkgPath" || apt-get -f install
 }
 
 if [ "$UID" != "0" ] ; then
@@ -43,7 +50,7 @@ fi
 pkgName=starcal2
 sourceDir="`dirname \"$myPath\"`"
 "$sourceDir/scripts/assert_python2"
-version=`"$sourceDir/scal2/get_version.py"`
+version=`"$sourceDir/scripts/version"`
 
 
 tmpDir=/tmp/$pkgName-install-deb

@@ -87,7 +87,7 @@ fi
 # fi
 
 echo "Using $pyCmd"
-version=`$pyCmd "$sourceDir/scal2/get_version.py"`
+version=`"$sourceDir/scripts/version"`
 
 
 targetDir=
